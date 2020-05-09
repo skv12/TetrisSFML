@@ -15,8 +15,9 @@ namespace app {
 		bool handleEvent(const Event& aEvent);
 		void draw(RenderTarget&) override;
 	private:
-		
+		Font font;
 		ifstream fin;
+		Text rec[10];
 		Texture texture;
 		RectangleShape background;
 		Button* menuButton;
