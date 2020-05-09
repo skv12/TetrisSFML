@@ -8,16 +8,10 @@
 
 using namespace sf;
 
-namespace app{
-	class Application {
-	private:
-		RenderWindow* window;
-		void processInput();
-		void update(const Time&);
-		void render();
+namespace app {
+	class Updateable {
 	public:
-		Application();
-		~Application();
-		void run();
+		virtual ~Updateable() = default;
+		virtual bool update(const sf::Time& deltaTime) { return false; };
 	};
 }

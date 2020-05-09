@@ -8,16 +8,10 @@
 
 using namespace sf;
 
-namespace app{
-	class Application {
-	private:
-		RenderWindow* window;
-		void processInput();
-		void update(const Time&);
-		void render();
+namespace app {
+	class Drawable {
 	public:
-		Application();
-		~Application();
-		void run();
+		virtual ~Drawable() = default;
+		virtual void draw(sf::RenderTarget&) = 0;
 	};
 }
