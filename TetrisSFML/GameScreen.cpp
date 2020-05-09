@@ -1,6 +1,8 @@
 #include "GameScreen.h"
 #include "ManagersInstance.h"
 #include "SceneManager.h"
+#include "HighScoreScreen.h"
+#include "MainMenuScreen.h"
 using namespace sf;
 const int M = 20; //Высота игрового поля
 const int N = 20; //Ширина игрового поля
@@ -98,7 +100,6 @@ void GameScreen::draw(RenderTarget& renderer) {
 }
 
 GameScreen::~GameScreen() {
-
 }
 
 GameScreen::GameScreen()
@@ -109,9 +110,11 @@ GameScreen::GameScreen()
 	
 
 	RenderWindow window(VideoMode(1280, 720), "Tetris");
-
+	
+	music.openFromFile("resources/Darude.ogg");
+	music.play();
 	//Создание и загрузка текстуры
-	Texture texture, texture_background;
+	
 	texture.loadFromFile("resources\\tiles.png");
 	texture_background.loadFromFile("resources\\background.png");
 	background.setTexture(&texture_background);
@@ -149,7 +152,7 @@ GameScreen::GameScreen()
 	while (window.isOpen())
 	{
 
-
+		
 
 		//Работа с текстами (Счет, Скорость, Линии)
 		sf::Font font;//шрифт 
@@ -215,6 +218,10 @@ GameScreen::GameScreen()
 			if (event.type == Event::Closed)
 				//Тогда закрываем его
 			{
+				GET_SCENE_MANAGER()->clearScenes();
+				auto nextScene = new MainMenuScreen();
+				GET_SCENE_MANAGER()->pushScene(nextScene);
+				
 				window.close();
 				records.push_back(Score);
 				sort(records.begin(), records.end(), std::greater<int>());
@@ -250,6 +257,9 @@ GameScreen::GameScreen()
 		if (Keyboard::isKeyPressed(Keyboard::Down)) delay2 = 0.05;
 		if (Keyboard::isKeyPressed(Keyboard::Escape))
 		{
+			GET_SCENE_MANAGER()->clearScenes();
+			auto nextScene = new HighScoreScreen();
+			GET_SCENE_MANAGER()->pushScene(nextScene);
 			window.close();
 			records.push_back(Score);
 			sort(records.begin(), records.end(), std::greater<int>());
@@ -438,7 +448,9 @@ GameScreen::GameScreen()
 		for (int i = 0; i < M; i++)
 			if (field[0][i])
 			{
-				
+				//GET_SCENE_MANAGER()->clearScenes();
+				auto nextScene = new HighScoreScreen();
+				GET_SCENE_MANAGER()->pushScene(nextScene);
 				window.close();
 				records.push_back(Score);
 				sort(records.begin(), records.end(), std::greater<int>());

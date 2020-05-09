@@ -61,7 +61,7 @@ HighScoreScreen::HighScoreScreen() {
 	playButton->setLabel("play");
 	playButton->setFillColor(Color::Transparent);
 	playButton->setReleaseCallback([]() {
-		GET_SCENE_MANAGER()->clearScenes();
+		//GET_SCENE_MANAGER()->clearScenes();
 		auto nextScene = new GameScreen();
 		GET_SCENE_MANAGER()->pushScene(nextScene);
 	});

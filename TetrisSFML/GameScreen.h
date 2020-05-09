@@ -26,7 +26,9 @@ namespace app{
 		bool handleEvent(const Event& aEvent);
 		void draw (RenderTarget&) override;
 	private:
-		sf::RectangleShape background;
-		sf::Texture tiles;
+		Music music;
+		Texture texture, texture_background;
+		RectangleShape background;
+		Texture tiles;
 	};
 }
